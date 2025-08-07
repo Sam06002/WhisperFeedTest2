@@ -199,7 +199,7 @@ export default function FeedPage() {
         <div className="mb-8 text-center">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Your Feed</h1>
           <p className="text-gray-600">
-            Discover what's happening in your network
+            Discover what&apos;s happening in your network
           </p>
         </div>
 
