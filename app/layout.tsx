@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { AuthProvider } from "@/contexts/AuthContext";
 
 // Font configuration
 const geistSans = Geist({
@@ -69,7 +70,9 @@ export default function RootLayout({
     >
       <body className="min-h-screen bg-background-light text-text-primary-light dark:bg-background-dark dark:text-text-primary-dark transition-colors duration-200">
         <div className="min-h-screen flex flex-col">
-          {children}
+          <AuthProvider>
+            {children}
+          </AuthProvider>
         </div>
       </body>
     </html>

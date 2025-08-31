@@ -1,9 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Lock, Mail, Eye, EyeOff } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
+import { getCurrentUser } from '@/lib/auth/auth';
 
 /**
  * LoginPage Component
@@ -11,34 +13,76 @@ import { Lock, Mail, Eye, EyeOff } from 'lucide-react';
  * A modern, accessible login page with form validation and loading states.
  * Uses Framer Motion for smooth animations and Lucide icons for visual feedback.
  */
+// Test credentials for development
+const TEST_CREDENTIALS = [
+  { username: 'testuser', password: 'password123' },
+  { username: 'admin', password: 'admin123' }
+];
+
 export default function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const { login } = useAuth();
   const router = useRouter();
 
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
-    setIsLoading(true);
     
+    // Basic validation
+    if (!username.trim() || !password) {
+      setError('Please enter both username and password');
+      return;
+    }
+
     try {
-      // TODO: Implement actual authentication
-      console.log('Login attempt with:', { username });
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      // For now, just redirect to home
-      router.push('/');
+      setIsLoading(true);
+      const success = await login(username, password);
+      if (success) {
+        // Redirect to dashboard or previous page
+        const returnUrl = new URLSearchParams(window.location.search).get('returnUrl');
+        router.push(returnUrl || '/dashboard');
+      }
     } catch (err) {
-      setError('Failed to log in. Please check your credentials.');
       console.error('Login error:', err);
+      setError('An unexpected error occurred. Please try again.');
     } finally {
       setIsLoading(false);
     }
   };
+  
+  // Auto-fill test credentials
+  const fillTestCredentials = (index: number) => {
+    const testUser = TEST_CREDENTIALS[index];
+    if (testUser) {
+      setUsername(testUser.username);
+      setPassword(testUser.password);
+      setError('');
+    }
+  };
+
+  // Clear form
+  const clearForm = () => {
+    setUsername('');
+    setPassword('');
+    setError('');
+  };
+  
+  // Redirect if already authenticated
+  useEffect(() => {
+    const checkAuth = async () => {
+      const user = getCurrentUser();
+      if (user) {
+        const returnUrl = new URLSearchParams(window.location.search).get('returnUrl');
+        router.push(returnUrl || '/dashboard');
+      }
+    };
+    checkAuth();
+  }, [router]);
 
   // Animation variants for Framer Motion
   const containerVariants = {
@@ -179,10 +223,23 @@ export default function LoginPage() {
                 >
                   Forgot password?
                 </a>
+                <button
+                  type="button"
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                  onClick={() => setShowPassword(!showPassword)}
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                  aria-pressed={showPassword}
+                >
+                  {showPassword ? (
+                    <EyeOff className="h-4 w-4" />
+                  ) : (
+                    <Eye className="h-4 w-4" />
+                  )}
+                </button>
               </motion.div>
 
               {/* Submit Button */}
-              <motion.div variants={itemVariants} className="pt-4">
+              <motion.div variants={itemVariants} className="pt-2">
                 <button
                   type="submit"
                   className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
