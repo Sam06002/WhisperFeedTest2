@@ -5,6 +5,12 @@ import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Lock, Mail, Eye, EyeOff } from 'lucide-react';
 
+/**
+ * LoginPage Component
+ * 
+ * A modern, accessible login page with form validation and loading states.
+ * Uses Framer Motion for smooth animations and Lucide icons for visual feedback.
+ */
 export default function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -13,6 +19,7 @@ export default function LoginPage() {
   const [error, setError] = useState('');
   const router = useRouter();
 
+  // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
@@ -33,6 +40,7 @@ export default function LoginPage() {
     }
   };
 
+  // Animation variants for Framer Motion
   const containerVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -59,25 +67,27 @@ export default function LoginPage() {
         variants={containerVariants}
       >
         <motion.div 
-          className="card overflow-hidden shadow-lg"
+          className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden"
           variants={itemVariants}
         >
-          <div className="card-header">
+          {/* Header Section */}
+          <div className="p-6 border-b border-gray-200 dark:border-gray-700">
             <div className="flex flex-col items-center justify-center space-y-2">
               <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
                 <Lock className="w-6 h-6 text-primary" />
               </div>
-              <h1 className="text-2xl font-bold text-center">Welcome back</h1>
-              <p className="text-sm text-muted-foreground text-center">
+              <h1 className="text-2xl font-bold text-center text-gray-900 dark:text-white">Welcome back</h1>
+              <p className="text-sm text-gray-500 dark:text-gray-400 text-center">
                 Enter your credentials to access your account
               </p>
             </div>
           </div>
           
-          <div className="card-body">
+          {/* Main Form Section */}
+          <div className="p-6">
             {error && (
               <motion.div 
-                className="mb-6 p-4 bg-destructive/10 border border-destructive/20 rounded-lg text-sm text-destructive"
+                className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-sm text-red-600 dark:text-red-400"
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
@@ -87,54 +97,58 @@ export default function LoginPage() {
             )}
             
             <form className="space-y-5" onSubmit={handleSubmit}>
+              {/* Username Field */}
               <motion.div variants={itemVariants}>
-                <label className="block text-sm font-medium mb-2" htmlFor="username">
+                <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300" htmlFor="username">
                   Username
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Mail className="h-4 w-4 text-muted-foreground" />
+                    <Mail className="h-4 w-4 text-gray-400" />
                   </div>
                   <input
                     id="username"
                     name="username"
                     type="text"
-                    className="input pl-10 w-full"
+                    className="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
                     placeholder="Enter your username"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     autoComplete="username"
                     autoFocus
                     required
+                    aria-required="true"
                   />
                 </div>
               </motion.div>
               
+              {/* Password Field */}
               <motion.div variants={itemVariants}>
-                <div className="mb-2">
-                  <label className="block text-sm font-medium" htmlFor="password">
-                    Password
-                  </label>
-                </div>
+                <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300" htmlFor="password">
+                  Password
+                </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Lock className="h-4 w-4 text-muted-foreground" />
+                    <Lock className="h-4 w-4 text-gray-400" />
                   </div>
                   <input
                     id="password"
                     name="password"
                     type={showPassword ? 'text' : 'password'}
-                    className="input pl-10 w-full pr-10"
-                    placeholder={"••••••••"}
+                    className="block w-full pl-10 pr-10 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+                    placeholder="••••••••"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     autoComplete="current-password"
                     required
+                    aria-required="true"
                   />
                   <button
                     type="button"
-                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-muted-foreground hover:text-foreground"
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
                     onClick={() => setShowPassword(!showPassword)}
+                    aria-label={showPassword ? 'Hide password' : 'Show password'}
+                    aria-pressed={showPassword}
                   >
                     {showPassword ? (
                       <EyeOff className="h-4 w-4" />
@@ -145,31 +159,33 @@ export default function LoginPage() {
                 </div>
               </motion.div>
               
+              {/* Remember Me & Forgot Password */}
               <motion.div variants={itemVariants} className="flex items-center justify-between pt-1">
                 <div className="flex items-center">
                   <input
                     id="remember"
                     name="remember"
                     type="checkbox"
-                    className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                    className="h-4 w-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700"
                   />
-                  <label htmlFor="remember" className="ml-2 block text-sm text-muted-foreground">
+                  <label htmlFor="remember" className="ml-2 block text-sm text-gray-700 dark:text-gray-300">
                     Remember me
                   </label>
                 </div>
                 <a 
                   href="/forgot-password" 
-                  className="text-sm text-primary hover:underline"
-                  aria-label="Forgot password?"
+                  className="text-sm text-primary-600 hover:text-primary-800 dark:text-primary-400 dark:hover:text-primary-300 hover:underline"
+                  aria-label="Forgot password"
                 >
                   Forgot password?
                 </a>
               </motion.div>
 
+              {/* Submit Button */}
               <motion.div variants={itemVariants} className="pt-4">
                 <button
                   type="submit"
-                  className="btn btn-primary w-full py-2.5 text-sm font-medium"
+                  className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
                   disabled={isLoading}
                   aria-busy={isLoading}
                   aria-live="polite"
@@ -190,24 +206,19 @@ export default function LoginPage() {
             </form>
           </div>
           
-          <div className="card-footer text-center text-sm">
-            <p className="text-muted-foreground">
+          {/* Footer Section */}
+          <div className="px-6 py-4 bg-gray-50 dark:bg-gray-700/50 text-center text-sm">
+            <p className="text-gray-600 dark:text-gray-400">
               Don&apos;t have an account?{' '}
               <a 
                 href="/signup" 
-                className="font-medium text-primary hover:underline"
+                className="font-medium text-primary-600 hover:text-primary-800 dark:text-primary-400 dark:hover:text-primary-300 hover:underline"
+                aria-label="Sign up for a new account"
               >
                 Sign up
               </a>
             </p>
           </div>
-        </motion.div>
-        
-        <motion.div 
-          className="mt-6 text-center text-xs text-muted-foreground"
-          variants={itemVariants}
-        >
-          <p>By continuing, you agree to our Terms of Service and Privacy Policy</p>
         </motion.div>
       </motion.div>
     </div>
