@@ -59,7 +59,7 @@ const samplePosts: Post[] = [
       "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face",
     timeAgo: "6h",
     content:
-      "Coffee ☕ + Code 💻 + Good music 🎵 = Perfect morning! What's your ideal coding setup?",
+      "Coffee ☕ + Code 💻 + Good music 🎵 = Perfect morning! What&#39;s your ideal coding setup?",
     image:
       "https://images.unsplash.com/photo-1509233725247-49e657c54213?w=600&h=400&fit=crop",
     likes: 156,
@@ -89,7 +89,7 @@ const samplePosts: Post[] = [
       "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=40&h=40&fit=crop&crop=face",
     timeAgo: "1d",
     content:
-      "Mobile-first design isn't just a trend, it's a necessity. Here's how we optimized our app for better performance on all devices.",
+      "Mobile-first design isn&#39;t just a trend, it&#39;s a necessity. Here&#39;s how we optimized our app for better performance on all devices.",
     image:
       "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=400&fit=crop",
     likes: 78,
@@ -216,7 +216,7 @@ export default function FeedPage() {
             <div className="flex-1">
               <input
                 type="text"
-                placeholder="What's on your mind?"
+                placeholder="What&#39;s on your mind?"
                 className="w-full px-4 py-3 bg-gray-50 rounded-full border-none outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all"
               />
             </div>

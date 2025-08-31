@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { motion, Variants } from "framer-motion";
-import AnimatedBackground from "@/app/components/AnimatedBackground";
+import StarBackground from "@/components/StarBackground";
 
 // Functions to generate random credentials
 function randomUsername() {
@@ -77,8 +77,8 @@ export default function SignupPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 sm:p-6 lg:p-8 relative">
-      {/* Animated Background */}
-      <AnimatedBackground />
+      {/* Starry Background */}
+      <StarBackground />
 
       <motion.div
         className="w-full max-w-md relative z-10"
