@@ -1,30 +1,125 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# WhisperFeed
 
-## Getting Started
+A modern, privacy-focused social platform that enables anonymous sharing and authentic conversations in a secure environment.
 
-First, run the development server:
+## 🚀 Features
 
-```bash
-pnpm dev
-```
+- 🔒 **Secure Authentication** - Built with NextAuth.js for secure user authentication
+- 🎨 **Modern UI** - Clean, responsive design with Tailwind CSS and Radix UI
+- ✨ **Animated Backgrounds** - Engaging visual experience with smooth animations
+- 🔔 **Toast Notifications** - User-friendly feedback system
+- 🛡️ **Protected Routes** - Secure access control for authenticated users
+- 📱 **Mobile-First** - Fully responsive design that works on all devices
+- ⚡ **Fast & Optimized** - Built with Next.js 13+ for optimal performance
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Framework**: [Next.js 15](https://nextjs.org/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/) with [Radix UI](https://www.radix-ui.com/)
+- **Authentication**: [NextAuth.js](https://next-auth.js.org/)
+- **State Management**: React Context API
+- **Form Handling**: React Hook Form
+- **Icons**: [Lucide Icons](https://lucide.dev/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Type Safety**: TypeScript
+- **Package Manager**: pnpm
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🚀 Getting Started
 
-## Learn More
+### Prerequisites
 
-To learn more about Next.js, take a look at the following resources:
+- Node.js 18+ and pnpm installed
+- Git for version control
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Installation
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Sam06002/WhisperFeedTest2.git
+   cd WhisperFeedTest2
+   ```
 
-## Deploy on Vercel
+2. Install dependencies:
+   ```bash
+   pnpm install
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. Set up environment variables:
+   Create a `.env.local` file in the root directory and add the following:
+   ```env
+   NEXTAUTH_SECRET=your-secret-here
+   NEXTAUTH_URL=http://localhost:3000
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+4. Start the development server:
+   ```bash
+   pnpm dev
+   ```
+
+5. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## 🎯 Usage
+
+### Authentication
+- The app uses a simple email/password authentication system
+- For development, you can use any email (no verification required)
+- Passwords must be at least 6 characters long
+
+### Development Workflow
+
+- Run the development server:
+  ```bash
+  pnpm dev
+  ```
+
+- Lint your code:
+  ```bash
+  pnpm lint
+  ```
+
+- Build for production:
+  ```bash
+  pnpm build
+  ```
+
+- Start production server:
+  ```bash
+  pnpm start
+  ```
+
+## 🤝 Contributing
+
+We welcome contributions! Please follow these steps:
+
+1. Fork the repository
+2. Create a new branch:
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+3. Make your changes and commit them:
+   ```bash
+   git commit -m "Add some feature"
+   ```
+4. Push to the branch:
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+5. Open a pull request
+
+### Code Style
+- Follow the existing code style
+- Use TypeScript for type safety
+- Keep components small and focused
+- Write meaningful commit messages
+- Run linter before committing
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Radix UI](https://www.radix-ui.com/)
+- [Lucide Icons](https://lucide.dev/)

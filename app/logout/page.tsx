@@ -1,14 +1,13 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/router';
 
 export default function LogoutPage() {
   const router = useRouter();
 
   useEffect(() => {
     // TODO: Implement actual logout logic (clear tokens, etc.)
-    console.log('User logged out');
     
     // Redirect to home after logout
     const timer = setTimeout(() => {

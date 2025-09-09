@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { useRouter } from 'next/router';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Home, Search, Bell, Mail, Bookmark, List, User, MoreHorizontal, LogIn, LogOut } from 'lucide-react';
@@ -12,22 +12,12 @@ type NavItem = {
   icon: React.ComponentType<{ className?: string }>;
 };
 
-const navItems: NavItem[] = [
-  { name: 'Home', href: '/home', icon: Home },
-  { name: 'Explore', href: '/explore', icon: Search },
-  { name: 'Notifications', href: '/notifications', icon: Bell },
-  { name: 'Messages', href: '/dms', icon: Mail },
-  { name: 'Bookmarks', href: '/bookmarks', icon: Bookmark },
-  { name: 'Lists', href: '/lists', icon: List },
-  { name: 'Profile', href: '/profile', icon: User },
-  { name: 'More', href: '/more', icon: MoreHorizontal },
-];
 
 export function Nav() {
-  const pathname = usePathname();
   const router = useRouter();
   const { user, isAuthenticated, logout, isLoading } = useAuth();
   const [isClient, setIsClient] = useState(false);
+  const pathname = router.pathname;
 
   // Fix hydration issues with Next.js
   useEffect(() => {

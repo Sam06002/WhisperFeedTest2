@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
 import { Lock, Mail, Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
@@ -13,11 +13,6 @@ import { getCurrentUser } from '@/lib/auth/auth';
  * A modern, accessible login page with form validation and loading states.
  * Uses Framer Motion for smooth animations and Lucide icons for visual feedback.
  */
-// Test credentials for development
-const TEST_CREDENTIALS = [
-  { username: 'testuser', password: 'password123' },
-  { username: 'admin', password: 'admin123' }
-];
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
@@ -55,22 +50,7 @@ export default function LoginPage() {
     }
   };
   
-  // Auto-fill test credentials
-  const fillTestCredentials = (index: number) => {
-    const testUser = TEST_CREDENTIALS[index];
-    if (testUser) {
-      setUsername(testUser.username);
-      setPassword(testUser.password);
-      setError('');
-    }
-  };
-
-  // Clear form
-  const clearForm = () => {
-    setUsername('');
-    setPassword('');
-    setError('');
-  };
+  // Form handling logic is now handled by the form's onSubmit and onChange handlers
   
   // Redirect if already authenticated
   useEffect(() => {
