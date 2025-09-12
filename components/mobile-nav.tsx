@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { useRouter } from 'next/router';
 import { cn } from '@/lib/utils';
 import { Home, Search, Bell, Mail, User } from 'lucide-react';
 
@@ -20,7 +20,8 @@ const mobileNavItems: MobileNavItem[] = [
 ];
 
 export function MobileNav() {
-  const pathname = usePathname();
+  const router = useRouter();
+  const pathname = router.pathname;
 
   return (
     <nav className="flex items-center justify-around h-16">

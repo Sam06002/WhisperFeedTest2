@@ -76,7 +76,7 @@ export const loginUser = async (username: string, password: string): Promise<Log
   }
   
   // Create user session (without password)
-  const { password: _, ...userData } = user;
+  const { password: _password, ...userData } = user;
   const session = { user: userData, expires: Date.now() + 24 * 60 * 60 * 1000 }; // 24 hours
   
   // Store session in localStorage

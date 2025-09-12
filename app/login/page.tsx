@@ -52,15 +52,19 @@ export default function LoginPage() {
   
   // Form handling logic is now handled by the form's onSubmit and onChange handlers
   
-  // Redirect if already authenticated
+  // Redirect if already logged in
   useEffect(() => {
     const checkAuth = async () => {
-      const user = getCurrentUser();
-      if (user) {
-        const returnUrl = new URLSearchParams(window.location.search).get('returnUrl');
-        router.push(returnUrl || '/dashboard');
+      try {
+        const user = await getCurrentUser();
+        if (user) {
+          router.push('/home');
+        }
+      } catch (_) {
+        // Not authenticated, stay on login page
       }
     };
+    
     checkAuth();
   }, [router]);
 
