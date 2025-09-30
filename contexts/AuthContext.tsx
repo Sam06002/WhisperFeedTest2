@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { getCurrentUser, loginUser, logout as authLogout } from '@/lib/auth/auth';
 import type { User } from '@/lib/auth/auth';
 import { toast } from '@/hooks/use-toast';

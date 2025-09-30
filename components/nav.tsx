@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { useRouter, usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Home, Search, Bell, Mail, Bookmark, List, User, MoreHorizontal, LogIn, LogOut } from 'lucide-react';
@@ -19,7 +19,7 @@ export function Nav() {
   const router = useRouter();
   const { user, isAuthenticated, logout, isLoading } = useAuth();
   const [isClient, setIsClient] = useState(false);
-  const pathname = router.pathname;
+  const pathname = usePathname();
 
   // Fix hydration issues with Next.js
   useEffect(() => {

@@ -77,8 +77,6 @@ export default function StarBackground() {
       ctx.fillStyle = config.bgColor;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Remove unused time variable
-
       // Draw and update each star
       stars.forEach((star) => {
         // Update star position with subtle movement

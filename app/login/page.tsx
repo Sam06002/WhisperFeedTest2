@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Lock, Mail, Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
@@ -22,6 +22,7 @@ export default function LoginPage() {
   const [error, setError] = useState('');
   const { login } = useAuth();
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
@@ -39,8 +40,8 @@ export default function LoginPage() {
       const success = await login(username, password);
       if (success) {
         // Redirect to dashboard or previous page
-        const returnUrl = new URLSearchParams(window.location.search).get('returnUrl');
-        router.push(returnUrl || '/dashboard');
+        const returnUrl = searchParams.get('returnUrl');
+        router.push(returnUrl || '/home');
       }
     } catch (err) {
       console.error('Login error:', err);
